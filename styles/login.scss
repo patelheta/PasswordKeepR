@@ -1,0 +1,38 @@
+.loginBox {
+  display: flex;
+  border-radius: 25px;
+  border: 5px solid black;
+  flex-direction: column;
+}
+
+.logo {
+  display: flex;
+  width: 50%;
+  height: 50%;
+}
+
+.titleLogo {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.loginBody {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+
+  background: rgb(163, 208, 219);
+  background: linear-gradient(
+    227deg,
+    rgba(163, 208, 219, 1) 0%,
+    rgba(163, 176, 219, 1) 20%,
+    rgba(163, 173, 219, 1) 34%,
+    rgba(163, 219, 208, 1) 59%,
+    rgba(163, 208, 219, 1) 74%,
+    rgba(163, 208, 219, 1) 100%
+  );
+
+}

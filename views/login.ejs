@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <title>LOGIN PAGE</title>
+
+  <meta charset="UTF-8" >
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" >
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" >
+
+  <link rel="stylesheet" href="/vendor/normalize-4.1.1.css" />
+  <link rel="stylesheet" href="/vendor/border-box.css" />
+  <link rel="stylesheet" href="/styles/main.css" />
+  <link rel="stylesheet" href="/styles/layout.css" />
+  <link rel="stylesheet" type="text/css" href="/styles/login.css" />
+
+  <script src="/vendor/jquery-3.0.0.js"></script>
+  <script defer src="/scripts/login.js"></script>
+</head>
+
+<body class="loginBody">
+  <div class="loginBox">
+    <div class="titleLogo">
+      <h1>PasswordKeepR</h1>
+      <img class="logo" src="https://png.pngtree.com/png-vector/20190115/ourmid/pngtree-vector-lock-icon-png-image_318067.jpg">
+    </div>
+    <input type="email" name="email" placeholder="Email"/>
+    <input type="password" name="password" placeholder="Password"/>
+    <form method="POST" action="/login">
+      <button class="loginButton">Login</button>
+    </form>
+    <form class="register" method="POST" action="/register">
+      <button class="registerButton">Register</button>
+    </form>
+  </div>
+</body>
+
+</html>

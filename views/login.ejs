@@ -24,10 +24,10 @@
       <h1>PasswordKeepR</h1>
       <img class="logo" src="https://png.pngtree.com/png-vector/20190115/ourmid/pngtree-vector-lock-icon-png-image_318067.jpg">
     </div>
-    <input type="email" name="email" placeholder="Email"/>
-    <input type="password" name="password" placeholder="Password"/>
     <form method="POST" action="/login">
-      <button class="loginButton">Login</button>
+      <input type="email" name="email" placeholder="Email" required/>
+      <input type="password" name="password" placeholder="Password" required/>
+        <button class="loginButton">Login</button>
     </form>
     <form class="register" method="POST" action="/register">
       <button class="registerButton">Register</button>

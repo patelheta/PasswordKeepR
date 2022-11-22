@@ -29,13 +29,13 @@ INSERT INTO user_websites (name, account_name, password, category_id, user_id)
 VALUES ('Reddit', 'redditAccount', 'redditPassword', 2, 3);
 
 INSERT INTO user_websites (name, account_name, password, category_id, user_id)
-VALUES ('Compass', 'compassAccount', 'compassPassword', 3, 1);
+VALUES ('Compass', 'compassAccount', 'compassPassword', 5, 1);
 
 INSERT INTO user_websites (name, account_name, password, category_id, user_id)
-VALUES ('Compass', 'compassAccount', 'compassPassword', 3, 2);
+VALUES ('Compass', 'compassAccount', 'compassPassword', 5, 2);
 
 INSERT INTO user_websites (name, account_name, password, category_id, user_id)
-VALUES ('Compass', 'compassAccount', 'compassPassword', 3, 3);
+VALUES ('Compass', 'compassAccount', 'compassPassword', 5, 3);
 
 INSERT INTO user_websites (name, account_name, password, category_id, user_id)
 VALUES ('Zoom', 'zoomAccount', 'zoomPassword', 0, 1);

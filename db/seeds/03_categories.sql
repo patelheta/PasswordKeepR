@@ -9,3 +9,9 @@ VALUES ('Entertainment');
 
 INSERT INTO categories (name)
 VALUES ('Work');
+
+INSERT INTO categories (name)
+VALUES ('Finance');
+
+INSERT INTO categories (name)
+VALUES ('Education');

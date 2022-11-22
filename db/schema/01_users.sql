@@ -8,6 +8,5 @@ CREATE TABLE users (
   last_name VARCHAR(225) NOT NULL,
   email VARCHAR(225) NOT NULL,
   password VARCHAR(225) NOT NULL,
-  organization_id INTEGER REFERENCES organizations(id) ON DELETE CASCADE,
-  user_websites_id INTEGER REFERENCES user_websites(id) ON DELETE CASCADE
+  organization_id INTEGER REFERENCES organizations(id) ON DELETE CASCADE
 );

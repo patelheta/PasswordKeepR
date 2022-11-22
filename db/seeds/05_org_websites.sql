@@ -5,7 +5,7 @@ INSERT INTO org_websites (name, account_name, password, category_id, organizatio
 VALUES ('Compass', 'compassAccount', 'compassPassword', 0, 2);
 
 INSERT INTO org_websites (name, account_name, password, category_id, organization_id)
-VALUES ('Facebook', 'facebookAccount', 'facebookPassword', 1);
+VALUES ('Facebook', 'facebookAccount', 'facebookPassword', 0, 1);
 
 INSERT INTO org_websites (name, account_name, password, category_id, organization_id)
 VALUES ('Twitter', 'twitterAccount', 'twitterPassword', 1, 1);

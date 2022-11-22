@@ -9,3 +9,4 @@ VALUES ('Entertainment');
 
 INSERT INTO categories (name)
 VALUES ('Work');
+

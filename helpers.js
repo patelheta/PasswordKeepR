@@ -14,7 +14,7 @@ const addNewUser = async function (user) {
     const newUser = await db.query(
       `INSERT INTO users(FIRST_NAME, LAST_NAME, EMAIL, USER_PASSWORD, ORGANIZATION_ID)
     VALUES ($1, $2, $3, $4, $5) RETURNING *;`,
-      [user.name, user.email, hash, Number(orgID.rows[0]["id"])]
+      [user.first_name, user.last_name, user.email, hash, Number(orgID.rows[0]["id"])]
     );
     return newUser.rows[0];
   } catch (err) {

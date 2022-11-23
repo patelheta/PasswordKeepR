@@ -22,16 +22,20 @@
   <div class="loginBox">
     <div class="titleLogo">
       <h1>PasswordKeepR</h1>
-      <img class="logo" src="https://png.pngtree.com/png-vector/20190115/ourmid/pngtree-vector-lock-icon-png-image_318067.jpg">
+      <img class="logo" src="https://www.freeiconspng.com/thumbs/lock-icon/lock-icon-11.png">
     </div>
-    <input type="email" name="email" placeholder="Email"/>
-    <input type="password" name="password" placeholder="Password"/>
     <form method="POST" action="/login">
-      <button class="loginButton">Login</button>
+      <div class="loginFields">
+        <input type="email" name="email" placeholder="Email" required/>
+        <input type="password" name="password" placeholder="Password" required/>
+      </div>
+        <div class="loginPageButtons">
+          <button class="loginButton">Login</button>
     </form>
-    <form class="register" method="POST" action="/register">
-      <button class="registerButton">Register</button>
-    </form>
+        <form class="register" method="GET" action="/register">
+          <button class="registerButton">Register</button>
+        </form>
+      </div>
   </div>
 </body>
 

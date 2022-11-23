@@ -1,6 +1,3 @@
-INSERT INTO categories (id, name)
-VALUES (0, 'Uncategorized');
-
 INSERT INTO categories (name)
 VALUES ('Socials');
 

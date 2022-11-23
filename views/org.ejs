@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <title>Home Page</title>
+    <title>Organization Page</title>
 
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -65,22 +65,41 @@
 
       <section id="allPasswords" class="p-4">
         <h4>My Organization's Passwords</h4>
+        <% for (let record of allRecords) { %>
         <div class="card">
           <div class="card-body">
             <div>
-              <p class="name">Website Name</p>
+              <p class="name"><%= record.name %></p>
               <span class="userpass">
-                <p class="account_name" id="username">Username</p>
+                <!-- <p class="account_name" id="username_<%= record.id %>">
+                    <%= record.account_name %>
+                  </p> -->
+                <input
+                  type="text"
+                  class="form-control mb-2"
+                  id="username_<%= record.id %>"
+                  value="<%= record.account_name %>"
+                  disabled="true"
+                />
                 <i
-                  class="fa-solid fa-copy ml-2"
-                  onclick="copyToClipboard('#username')"
+                  class="fa-regular fa-copy ml-2"
+                  onclick="copyToClipboard('#username_<%= record.id %>')"
                 ></i>
               </span>
               <span class="userpass">
-                <p class="password" id="password1">Password</p>
+                <!-- <p class="password" id="password_<%= record.id %>">
+                    <%= record.password %>
+                  </p> -->
+                <input
+                  type="password"
+                  class="form-control"
+                  id="password_<%= record.id %>"
+                  value="<%= record.password %>"
+                  disabled="true"
+                />
                 <i
-                  class="fa-solid fa-copy ml-2"
-                  onclick="copyToClipboard('#password1')"
+                  class="fa-regular fa-copy ml-2"
+                  onclick="copyToClipboard('#password_<%= record.id %>')"
                 ></i>
               </span>
             </div>
@@ -91,6 +110,7 @@
             </div>
           </div>
         </div>
+        <% } %>
       </section>
     </main>
 

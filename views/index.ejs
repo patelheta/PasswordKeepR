@@ -31,16 +31,6 @@
     <!-- External JS -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script defer src="/scripts/index.js"></script>
-
-    <script>
-      function copyToClipboard(element) {
-        var $temp = $("<input>");
-        $("body").append($temp);
-        $temp.val($(element).text()).select();
-        document.execCommand("copy");
-        $temp.remove();
-      }
-    </script>
   </head>
 
   <body>
@@ -55,73 +45,21 @@
           <li>Lighthouse Lab</li>
           <li>My Workplace</li>
         </ul>
-        <h4><i class="fa-solid fa-filter mr-1"></i>Categories</h4>
-        <ul>
-          <% for (let category of categories) { %>
-          <li><%= category.name %></li>
-          <% } %>
-        </ul>
+        <div class="d-flex justify-content-between align-items-center">
+          <h4><i class="fa-solid fa-filter mr-1"></i>Categories</h4>
+          <small id="clearFilterBtn" class="float-right">clear</small>
+        </div>
+        <ul id="categoriesList" class="mt-2"></ul>
       </div>
 
-      <section id="allPasswords" class="p-4">
+      <section class="p-4 w-100">
         <h4>My Passwords</h4>
-        <% for (let record of allRecords) { %>
-        <div class="card">
-          <div class="card-body">
-            <div>
-              <p class="name"><%= record.name %></p>
-              <span class="userpass">
-                <!-- <p class="account_name" id="username_<%= record.id %>">
-                  <%= record.account_name %>
-                </p> -->
-                <input
-                  type="text"
-                  class="form-control mb-2"
-                  id="username_<%= record.id %>"
-                  value="<%= record.account_name %>"
-                  disabled="true"
-                />
-                <i
-                  class="fa-regular fa-copy ml-2"
-                  onclick="copyToClipboard('#username_<%= record.id %>')"
-                ></i>
-              </span>
-              <span class="userpass">
-                <!-- <p class="password" id="password_<%= record.id %>">
-                  <%= record.password %>
-                </p> -->
-                <input
-                  type="password"
-                  class="form-control"
-                  id="password_<%= record.id %>"
-                  value="<%= record.password %>"
-                  disabled="true"
-                />
-                <i
-                  class="fa-regular fa-copy ml-2"
-                  onclick="copyToClipboard('#password_<%= record.id %>')"
-                ></i>
-              </span>
-            </div>
-            <div class="action-button">
-              <span onclick="showHiddenPassword('#password_<%= record.id %>')">
-                <i class="fa-solid fa-eye mr-1"></i>Show
-              </span>
-              <span> <i class="fa-solid fa-pen-to-square mr-1"></i>Edit</span>
-              <span><i class="fa-solid fa-trash"></i></span>
-            </div>
-          </div>
-        </div>
-        <% } %>
+        <div id="allRecords"></div>
       </section>
     </main>
 
     <!-- Bootstrap JS -->
-    <script
-      src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
-      integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
-      crossorigin="anonymous"
-    ></script>
+    <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
     <script
       src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
       integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"

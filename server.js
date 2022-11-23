@@ -32,10 +32,8 @@ const userApiRoutes = require('./routes/users-api');
 const widgetApiRoutes = require('./routes/widgets-api');
 const usersRoutes = require('./routes/users');
 const loginRoutes = require('./routes/login')
+const registerRoutes = require('./routes/register')
 
-// FOR REGISTER PAGE
-// const registerRoutes = require('./routes/register')
-// app.use('/register', registerRoutes)
 
 
 // Mount all resource routes
@@ -46,6 +44,7 @@ app.use('/api/widgets', widgetApiRoutes);
 app.use('/users', usersRoutes);
 // Note: mount other resources here, using the same pattern above
 app.use('/login', loginRoutes);
+app.use('/register', registerRoutes);
 
 
 

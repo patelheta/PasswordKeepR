@@ -21,8 +21,8 @@ router.get('/:id', (req, res) => {
   res.redirect('/');
 });
 
-// router.get('/register', (req, res) => {
-//   res.redirect('/register');
-// })
+router.get('/register', (req, res) => {
+  res.redirect('/register');
+});
 
 module.exports = router;

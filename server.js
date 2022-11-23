@@ -57,7 +57,7 @@ let allCategories = [];
 let allPasswords = [];
 
 
-categoriesQuery.getcategories().then(categories => {
+categoriesQuery.getCategories().then(categories => {
   allCategories = categories;
 });
 

@@ -58,8 +58,7 @@ const getAllPasswords = () => {
       console.log(err);
     });
 };
-
-module.exports = { getAllPasswords };
+exports.getAllPasswords = getAllPasswords;
 
 
 const getOrganizations = () => {
@@ -72,13 +71,10 @@ const getOrganizations = () => {
       console.log(err);
     });
 };
+exports.getOrganizations = getOrganizations;
 
-module.exports = { getOrganizations };
 
-
-const db = require('../connection');
-
-const getcategories = () => {
+const getCategories = () => {
   return db.query('SELECT * FROM categories;')
     .then(data => {
       console.log(data.rows);
@@ -88,5 +84,4 @@ const getcategories = () => {
       console.log(err);
     });
 };
-
-module.exports = { getcategories };
+exports.getCategories = getCategories;

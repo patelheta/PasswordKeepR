@@ -34,17 +34,9 @@
   justify-content: center;
   align-items: center;
   min-height: 100vh;
-
-
 }
 
-.loginButton {
-  display: flex;
-  flex-direction: column;
-  margin-bottom: 5px;
-}
-
-.loginFields {
+.registerFields {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -52,21 +44,29 @@
   font-size: 25px;
 }
 
-.loginPageButtons {
+.registerFields input {
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-bottom: 25px;
+  margin-bottom: 15px;
   font-size: 25px;
 }
 
-.loginPageButtons button {
+.registerButton {
   background-color: #4CAF50; /* Green */
   border: 2px solid black;
-  color: black;
+  color: rgb(1, 0, 0);
   padding: 12px 30px;
   text-align: center;
   text-decoration: none;
   display: inline-block;
   font-size: 20px;
 }
+
+.registerForm {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 25px;
+}
+

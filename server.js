@@ -57,13 +57,13 @@ let allCategories = [];
 let allPasswords = [];
 
 
-categoriesQuery.getcategories().then(categories => {
-  allCategories = categories;
-});
+// categoriesQuery.getcategories().then(categories => {
+//   allCategories = categories;
+// });
 
-passwordsQuery.getAllPasswords().then(passwords => {
-  allPasswords = passwords;
-});
+// passwordsQuery.getAllPasswords().then(passwords => {
+//   allPasswords = passwords;
+// });
 
 app.get('/', (req, res) => {
   const templateVars = { categories: allCategories, allRecords: allPasswords };

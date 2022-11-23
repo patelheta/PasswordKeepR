@@ -1,5 +1,6 @@
 .card {
   border-radius: 10px !important;
+  margin-bottom: 15px;
 }
 .card-body {
   display: flex;
@@ -11,15 +12,21 @@
 .card-body p {
   margin-bottom: 0px;
 }
+
 .card-body .name {
   font-weight: bold;
 }
+
 .userpass {
   padding: auto 8px;
   display: flex;
   flex-direction: row;
   align-items: center;
 }
+.userpass .form-control {
+  min-width: 20em;
+}
+
 .action-button {
   display: flex;
   align-items: center;

@@ -43,12 +43,22 @@
   height: 100vh;
   box-shadow: 0 2px 5px RGBA(0, 24, 48, 0.2);
 }
+
 .sidebar ul {
   list-style-type: none;
   padding: 0px;
   margin-bottom: 25px;
+  li {
+    padding: 8px;
+  }
+}
+.content {
+  margin-top: 30px;
 }
 
 .active {
   font-weight: 900;
+  border-radius: 4px;
+  background-color: #ffdada;
+  padding: 8px;
 }

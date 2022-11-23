@@ -58,7 +58,7 @@ app.get('/', (req, res) => {
 });
 
 app.get('/org', (req, res) => {
-  res.render('org.ejs');
+  res.render('org');
 });
 
 app.listen(PORT, () => {

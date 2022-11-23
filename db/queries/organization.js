@@ -1,6 +1,6 @@
 const db = require('../connection');
 
-const getOrganizations = () => {
+const getAllOrganizations = () => {
   return db.query('SELECT * FROM organizations;')
     .then(data => {
       console.log(data.rows);
@@ -11,4 +11,4 @@ const getOrganizations = () => {
     });
 };
 
-module.exports = { getOrganizations };
+module.exports = { getAllOrganizations };

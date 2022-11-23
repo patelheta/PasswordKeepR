@@ -34,10 +34,8 @@ const usersRoutes = require('./routes/users');
 const loginRoutes = require('./routes/login');
 const categoriesQuery = require('./db/queries/categories');
 const passwordsQuery = require('./db/queries/passwords');
+const registerRoutes = require('./routes/register');
 
-// FOR REGISTER PAGE
-// const registerRoutes = require('./routes/register')
-// app.use('/register', registerRoutes)
 
 
 // Mount all resource routes
@@ -48,6 +46,7 @@ app.use('/api/widgets', widgetApiRoutes);
 app.use('/users', usersRoutes);
 // Note: mount other resources here, using the same pattern above
 app.use('/login', loginRoutes);
+app.use('/register', registerRoutes);
 
 
 
@@ -58,13 +57,13 @@ let allCategories = [];
 let allPasswords = [];
 
 
-categoriesQuery.getcategories().then(categories => {
-  allCategories = categories;
-});
+// categoriesQuery.getcategories().then(categories => {
+//   allCategories = categories;
+// });
 
-passwordsQuery.getAllPasswords().then(passwords => {
-  allPasswords = passwords;
-});
+// passwordsQuery.getAllPasswords().then(passwords => {
+//   allPasswords = passwords;
+// });
 
 app.get('/', (req, res) => {
   const templateVars = { categories: allCategories, allRecords: allPasswords };

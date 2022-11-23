@@ -32,8 +32,8 @@ const userApiRoutes = require('./routes/users-api');
 const widgetApiRoutes = require('./routes/widgets-api');
 const usersRoutes = require('./routes/users');
 const loginRoutes = require('./routes/login');
-const categoriesQuery = require('./db/queries/categories');
-const passwordsQuery = require('./db/queries/passwords');
+const categoriesQuery = require('./helpers');
+const passwordsQuery = require('./helpers');
 const registerRoutes = require('./routes/register');
 
 
@@ -57,13 +57,13 @@ let allCategories = [];
 let allPasswords = [];
 
 
-// categoriesQuery.getcategories().then(categories => {
-//   allCategories = categories;
-// });
+categoriesQuery.getcategories().then(categories => {
+  allCategories = categories;
+});
 
-// passwordsQuery.getAllPasswords().then(passwords => {
-//   allPasswords = passwords;
-// });
+passwordsQuery.getAllPasswords().then(passwords => {
+  allPasswords = passwords;
+});
 
 app.get('/', (req, res) => {
   const templateVars = { categories: allCategories, allRecords: allPasswords };

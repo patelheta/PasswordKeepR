@@ -1,5 +1,5 @@
-INSERT organizations (name)
+INSERT INTO organizations (name)
 VALUES ('Lighthouse Labs');
 
-INSERT organizations (name)
+INSERT INTO organizations (name)
 VALUES ('Coding Team');

@@ -31,7 +31,9 @@ app.use(express.static('public'));
 const userApiRoutes = require('./routes/users-api');
 const widgetApiRoutes = require('./routes/widgets-api');
 const usersRoutes = require('./routes/users');
-const loginRoutes = require('./routes/login')
+const loginRoutes = require('./routes/login');
+const categoriesQuery = require('./db/queries/categories');
+const passwordsQuery = require('./db/queries/passwords');
 
 // FOR REGISTER PAGE
 // const registerRoutes = require('./routes/register')
@@ -52,12 +54,26 @@ app.use('/login', loginRoutes);
 // Home page
 // Warning: avoid creating more routes in this file!
 // Separate them into separate routes files (see above).
+let allCategories = [];
+let allPasswords = [];
+
+
+categoriesQuery.getcategories().then(categories => {
+  allCategories = categories;
+});
+
+passwordsQuery.getAllPasswords().then(passwords => {
+  allPasswords = passwords;
+});
 
 app.get('/', (req, res) => {
-  res.render('index');
+  const templateVars = { categories: allCategories, allRecords: allPasswords };
+  res.render('index', templateVars);
 });
+
 app.get('/org', (req, res) => {
-  res.render('org.ejs');
+  const templateVars = { categories: allCategories, allRecords: allPasswords };
+  res.render('org.ejs', templateVars);
 });
 
 app.listen(PORT, () => {

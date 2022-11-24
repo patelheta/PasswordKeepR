@@ -34,6 +34,9 @@ const widgetApiRoutes = require('./routes/widgets-api');
 const usersRoutes = require('./routes/users');
 const loginRoutes = require('./routes/login');
 const registerRoutes = require('./routes/register');
+const deletePasswordRoutes = require('./routes/deletePassword');
+const editPasswordRoutes = require('./routes/editPassword');
+const logoutRoutes = require('./routes/logout');
 
 
 
@@ -47,7 +50,9 @@ app.use('/users', usersRoutes);
 // Note: mount other resources here, using the same pattern above
 app.use('/login', loginRoutes);
 app.use('/register', registerRoutes);
-
+app.use('/deletePassword', deletePasswordRoutes);
+app.use('/editPassword', editPasswordRoutes)
+app.use('/logout', logoutRoutes)
 
 
 // Home page

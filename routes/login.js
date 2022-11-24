@@ -2,6 +2,30 @@ const express = require('express');
 const router  = express.Router();
 const cookieSession = require('cookie-session');
 
+// module.exports = (obj) => {
+
+//   router.post('/', (req, res) =>{
+//     const { email, password } = req.body;
+//     obj
+//       .authenticateUser(email, password)
+//       .then((user) => {
+//         if (!user) {
+//           res.render('login/:id', { error: true });
+//           return;
+//         }
+//         req.session['user_id'] = user.id;
+//         req.session['organization_id'] = user.organization_id;
+
+//         res.redirect('/main');
+//       })
+//       .catch((err) => {
+//         console.log('Error', err);
+//     });
+//   });
+
+//   return router;
+// };
+
 router.use(cookieSession({
   name: 'session',
   keys: ['CHARLES'],

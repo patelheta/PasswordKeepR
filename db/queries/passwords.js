@@ -1,8 +1,14 @@
 const db = require('../connection');
 
-const getAllPasswords = () => {
-  let queryString = `SELECT * FROM user_websites;`;
-  return db.query(queryString)
+const getAllPasswords = (options) => {
+  const queryParams = [];
+  let queryString = `SELECT * FROM user_websites `;
+  if (options.categoryId) {
+    queryParams.push(Number(options.categoryId));
+    queryString += `WHERE category_id = $${queryParams.length} `;
+  }
+  queryString += `;`;
+  return db.query(queryString, queryParams)
     .then(data => {
       console.log(data.rows);
       return data.rows;

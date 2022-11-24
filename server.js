@@ -29,11 +29,15 @@ app.use(express.static('public'));
 // Separated Routes for each Resource
 // Note: Feel free to replace the example routes below with your own
 const userApiRoutes = require('./routes/users-api');
+const passwordsApiRoutes = require('./routes/passwords-api');
 const widgetApiRoutes = require('./routes/widgets-api');
 const usersRoutes = require('./routes/users');
 const loginRoutes = require('./routes/login');
+<<<<<<< HEAD
 const categoriesQuery = require('./helpers');
 const passwordsQuery = require('./helpers');
+=======
+>>>>>>> 54dd3523efe5b27eafb28db876390f256953a3ef
 const registerRoutes = require('./routes/register');
 
 
@@ -42,6 +46,7 @@ const registerRoutes = require('./routes/register');
 // Note: Feel free to replace the example routes below with your own
 // Note: Endpoints that return data (eg. JSON) usually start with `/api`
 app.use('/api/users', userApiRoutes);
+app.use('/api/passwords', passwordsApiRoutes);
 app.use('/api/widgets', widgetApiRoutes);
 app.use('/users', usersRoutes);
 // Note: mount other resources here, using the same pattern above
@@ -53,6 +58,7 @@ app.use('/register', registerRoutes);
 // Home page
 // Warning: avoid creating more routes in this file!
 // Separate them into separate routes files (see above).
+<<<<<<< HEAD
 let allCategories = [];
 let allPasswords = [];
 
@@ -65,14 +71,14 @@ passwordsQuery.getAllPasswords().then(passwords => {
   allPasswords = passwords;
 });
 
+=======
+>>>>>>> 54dd3523efe5b27eafb28db876390f256953a3ef
 app.get('/', (req, res) => {
-  const templateVars = { categories: allCategories, allRecords: allPasswords };
-  res.render('index', templateVars);
+  res.render('index');
 });
 
 app.get('/org', (req, res) => {
-  const templateVars = { categories: allCategories, allRecords: allPasswords };
-  res.render('org.ejs', templateVars);
+  res.render('org.ejs');
 });
 
 app.listen(PORT, () => {

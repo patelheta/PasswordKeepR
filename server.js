@@ -5,10 +5,16 @@ require('dotenv').config();
 const sassMiddleware = require('./lib/sass-middleware');
 const express = require('express');
 const morgan = require('morgan');
+const cookieSession = require('cookie-session');
+
 
 const PORT = process.env.PORT || 8080;
 const app = express();
 
+app.use(cookieSession({
+  name: 'session',
+  keys: ['secretkey'],
+}));
 app.set('view engine', 'ejs');
 
 // Load the logger first so all (static) HTTP requests are logged to STDOUT
@@ -36,6 +42,7 @@ const loginRoutes = require('./routes/login');
 const registerRoutes = require('./routes/register');
 const deletePasswordRoutes = require('./routes/deletePassword');
 const editPasswordRoutes = require('./routes/editPassword');
+const createPasswordRoutes = require('./routes/createPassword');
 const logoutRoutes = require('./routes/logout');
 
 
@@ -50,9 +57,10 @@ app.use('/users', usersRoutes);
 // Note: mount other resources here, using the same pattern above
 app.use('/login', loginRoutes);
 app.use('/register', registerRoutes);
+app.use('/createPassword', createPasswordRoutes);
 app.use('/deletePassword', deletePasswordRoutes);
-app.use('/editPassword', editPasswordRoutes)
-app.use('/logout', logoutRoutes)
+app.use('/editPassword', editPasswordRoutes);
+app.use('/logout', logoutRoutes);
 
 
 // Home page
@@ -64,6 +72,10 @@ app.get('/', (req, res) => {
 
 app.get('/org', (req, res) => {
   res.render('org');
+});
+
+app.get('/create-password', (req, res) => {
+  res.render('createPassword');
 });
 
 app.listen(PORT, () => {

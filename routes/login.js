@@ -1,6 +1,5 @@
 const express = require('express');
-const router  = express.Router();
-const cookieSession = require('cookie-session');
+const router = express.Router();
 
 // module.exports = (obj) => {
 
@@ -26,18 +25,14 @@ const cookieSession = require('cookie-session');
 //   return router;
 // };
 
-router.use(cookieSession({
-  name: 'session',
-  keys: ['CHARLES'],
-  maxAge: 24 * 60 * 60 * 1000
-}));
-
 router.get('/', (req, res) => {
   res.render('login');
 });
 
 router.post('/', (req, res) => {
-  res.redirect('/login/:id');
+  req.session.user_id = 1;
+  // res.redirect('/login/:id');
+  res.redirect('/');
 });
 
 router.get('/:id', (req, res) => {

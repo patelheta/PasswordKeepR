@@ -11,7 +11,7 @@ const getAllOrgPasswords = (options) => {
     queryParams.push(Number(options.categoryId));
     queryString += (options.organizationId ? "AND " : "WHERE ") + `category_id = $${queryParams.length} `;
   }
-  queryString += `;`;
+  queryString += `ORDER BY id DESC ;`;
   return db.query(queryString, queryParams)
     .then(data => {
       // console.log(data.rows);

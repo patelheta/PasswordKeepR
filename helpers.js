@@ -84,3 +84,19 @@ const updateUserPassword = async function (password, id) {
   }
 };
 exports.updateUserPassword = updateUserPassword;
+
+
+const authenticateUser = async function (email, password) {
+  try {
+    let user = await getUserByEmail(email);
+    if (await argon2.verify(user.user_password, password)) {
+      return user;
+    } else {
+      user = null;
+      return user;
+    }
+  } catch (err) {
+    console,log('Error', err);
+  }
+};
+exports.authenticateUser = authenticateUser;

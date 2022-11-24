@@ -33,12 +33,10 @@ const passwordsApiRoutes = require('./routes/passwords-api');
 const widgetApiRoutes = require('./routes/widgets-api');
 const usersRoutes = require('./routes/users');
 const loginRoutes = require('./routes/login');
-<<<<<<< HEAD
-const categoriesQuery = require('./helpers');
-const passwordsQuery = require('./helpers');
-=======
->>>>>>> 54dd3523efe5b27eafb28db876390f256953a3ef
 const registerRoutes = require('./routes/register');
+const deletePasswordRoutes = require('./routes/deletePassword');
+const editPasswordRoutes = require('./routes/editPassword');
+const logoutRoutes = require('./routes/logout');
 
 
 
@@ -52,33 +50,20 @@ app.use('/users', usersRoutes);
 // Note: mount other resources here, using the same pattern above
 app.use('/login', loginRoutes);
 app.use('/register', registerRoutes);
-
+app.use('/deletePassword', deletePasswordRoutes);
+app.use('/editPassword', editPasswordRoutes)
+app.use('/logout', logoutRoutes)
 
 
 // Home page
 // Warning: avoid creating more routes in this file!
 // Separate them into separate routes files (see above).
-<<<<<<< HEAD
-let allCategories = [];
-let allPasswords = [];
-
-
-categoriesQuery.getCategories().then(categories => {
-  allCategories = categories;
-});
-
-passwordsQuery.getAllPasswords().then(passwords => {
-  allPasswords = passwords;
-});
-
-=======
->>>>>>> 54dd3523efe5b27eafb28db876390f256953a3ef
 app.get('/', (req, res) => {
   res.render('index');
 });
 
 app.get('/org', (req, res) => {
-  res.render('org.ejs');
+  res.render('org');
 });
 
 app.listen(PORT, () => {

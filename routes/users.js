@@ -36,5 +36,19 @@ module.exports = (db, obj) => {
     }))
   })
 
+  router.post('/email', (req, res) =>{
+    const id = req.session.user_id;
+    const { email } = req.body;
+    obj.updateUserEmail(email, id);
+    res.send();
+  });
+
+  router.post('/password', (req, res) => {
+    const id = req.session.user_id;
+    const { password } = req.body;
+    obj.updateUserPassword(password, id);
+    res.send();
+  });
+
   return router;
 };

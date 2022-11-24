@@ -47,41 +47,40 @@ const getUserByEmail = async function (email) {
 exports.getUserByEmail = getUserByEmail;
 
 
-const getAllPasswords = () => {
-  let queryString = `SELECT * FROM user_websites;`;
-  return db.query(queryString)
-    .then(data => {
-      console.log(data.rows);
-      return data.rows;
-    })
-    .catch((err) => {
-      console.log(err);
-    });
+const updateUserEmail = async function (email, id) {
+  try {
+    const updatedUser = await db.query(
+      `
+      UPDATE users
+      SET email = $1
+      WHERE id = $2
+      RETURNING *;
+      `,
+      [email, id]
+    );
+    return updatedUser;
+  } catch (err) {
+    console.log('Error', err);
+  }
 };
-exports.getAllPasswords = getAllPasswords;
+exports.updateUserEmail = updateUserEmail;
 
 
-const getOrganizations = () => {
-  return db.query('SELECT * FROM organizations;')
-    .then(data => {
-      console.log(data.rows);
-      return data.rows;
-    })
-    .catch((err) => {
-      console.log(err);
-    });
+const updateUserPassword = async function (password, id) {
+  try {
+    const hash = await argon2.hash(password);
+    const updatedUser = await db.query(
+      `
+      UPDATE users
+      SET user_password = $1
+      WHERE id = $2
+      RETURNING *;
+      `,
+      [hash, id]
+    );
+    return updatedUser;
+  } catch (err) {
+    console.log('Error', err);
+  }
 };
-exports.getOrganizations = getOrganizations;
-
-
-const getCategories = () => {
-  return db.query('SELECT * FROM categories;')
-    .then(data => {
-      console.log(data.rows);
-      return data.rows;
-    })
-    .catch((err) => {
-      console.log(err);
-    });
-};
-exports.getCategories = getCategories;
+exports.updateUserPassword = updateUserPassword;

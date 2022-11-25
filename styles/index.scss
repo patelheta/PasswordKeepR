@@ -15,6 +15,7 @@
 
 .card-body .name {
   font-weight: bold;
+  min-width: 20em;
 }
 
 .userpass {
@@ -31,6 +32,10 @@
   display: flex;
   align-items: center;
   gap: 10px;
+
+  .savebtn {
+    display: none;
+  }
 }
 
 .maincontent {

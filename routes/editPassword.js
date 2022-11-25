@@ -1,31 +1,24 @@
 const express = require('express');
 const router = express.Router();
+const editPasswordQuery = require('../db/queries/editPassword');
 
-module.exports = (db) => {
+router.post('/', (req, res) => {
+  // const userId = req.session.userId;
+  console.log(req.body);
+  editPasswordQuery.editPassword(req.body)
+    .then((data) => {
+      if (data) {
+        res.json(data);
+      } else {
+        res.send("Fail to edit password");
+      }
+    })
+    .catch(err => {
+      res
+        .status(500)
+        .json({ error: err.message });
+    });
+});
 
-  router.post('/', (req, res) => {
-    const body = req.body;
+module.exports = router;
 
-    if (body.username) {
-      db.query(
-        `
-        UPDATE user_websites SET account_name = $1 WHERE name = $2 RETURNING *;
-        `, [body.username, body.website])
-    }
-    if (body.password) {
-      db.query(
-        `
-        UPDATE user_websites SET password = $1 WHERE account_name = $2 RETURNING *;
-        `, [body.password, body.website])
-    }
-    if (body.username && body.password) {
-      db.query(
-        `
-        UPDATE user_websites SET account_name = $1, password = $2 WHERE name = $3 RETURNING *;
-        `, [body.username, body.password, body.website])
-    }
-    res.send('success')
-  })
-
-  return router;
-};

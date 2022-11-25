@@ -1,47 +1,47 @@
 const express = require('express');
 const router = express.Router();
 
-// module.exports = (obj) => {
+module.exports = (obj) => {
 
-//   router.post('/', (req, res) =>{
-//     const { email, password } = req.body;
-//     obj
-//       .authenticateUser(email, password)
-//       .then((user) => {
-//         if (!user) {
-//           res.render('login/:id', { error: true });
-//           return;
-//         }
-//         req.session['user_id'] = user.id;
-//         req.session['organization_id'] = user.organization_id;
+  router.get('/', (req, res) => {
+    res.render('login');
+  });
 
-//         res.redirect('/main');
-//       })
-//       .catch((err) => {
-//         console.log('Error', err);
-//     });
-//   });
+  router.post('/', (req, res) => {
+    const { email, password } = req.body;
+    obj
+      .authenticateUser(email, password)
+      .then((user) => {
+        if (!user) {
+          res.render('index.ejs', { error: true });
+          return;
+        }
+        req.session['user_id'] = user.id;
+        req.session['organization_id'] = user.organization_id;
 
-//   return router;
-// };
+        res.redirect("/main");
+      })
+      .catch((err) => res.send('Error', err));
+  });
+  return router;
+};
+  // router.post('/', (req, res) => {
+  //   req.session.user_id = 1;
+  //   // res.redirect('/login/:id');
+  //   res.redirect('/');
+  // });
 
-router.get('/', (req, res) => {
-  res.render('login');
-});
+// router.post('/', (req, res) => {
+//   res.redirect('/login/:id');
+// });
 
-router.post('/', (req, res) => {
-  req.session.user_id = 1;
-  // res.redirect('/login/:id');
-  res.redirect('/');
-});
+// router.get('/:id', (req, res) => {
+//   req.session.user_id = req.params.id;
+//   res.redirect('/');
+// });
 
-router.get('/:id', (req, res) => {
-  req.session.user_id = req.params.id;
-  res.redirect('/');
-});
+// router.get('/register', (req, res) => {
+//   res.redirect('/register');
+// });
 
-router.get('/register', (req, res) => {
-  res.redirect('/register');
-});
-
-module.exports = router;
+// module.exports = router;

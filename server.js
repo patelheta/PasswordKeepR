@@ -7,15 +7,26 @@ const express = require('express');
 const morgan = require('morgan');
 const cookieSession = require('cookie-session');
 
-
 const PORT = process.env.PORT || 8080;
 const app = express();
 
-app.use(cookieSession({
-  name: 'session',
-  keys: ['secretkey'],
-}));
+const { Pool } = require('pg');
+
+const dbParams = {
+  host: process.env.DB_HOST,
+  port: process.env.DB_PORT,
+  user: process.env.DB_USER,
+  password: process.env.DB_PASS,
+  database: process.env.DB_NAME
+};
+
+const db = new Pool(dbParams);
+
+db.connect();
+
 app.set('view engine', 'ejs');
+
+const obj = require("./helpers");
 
 // Load the logger first so all (static) HTTP requests are logged to STDOUT
 // 'dev' = Concise output colored by response status for development use.
@@ -31,6 +42,7 @@ app.use(
   })
 );
 app.use(express.static('public'));
+app.use(cookieSession({ name: 'session', keys: ["user_id"], maxAge: 24 * 60 * 60 * 1000 /*24 hours*/ }));
 
 // Separated Routes for each Resource
 // Note: Feel free to replace the example routes below with your own
@@ -55,12 +67,17 @@ app.use('/api/passwords', passwordsApiRoutes);
 app.use('/api/widgets', widgetApiRoutes);
 app.use('/users', usersRoutes);
 // Note: mount other resources here, using the same pattern above
-app.use('/login', loginRoutes);
-app.use('/register', registerRoutes);
-app.use('/createPassword', createPasswordRoutes);
-app.use('/deletePassword', deletePasswordRoutes);
-app.use('/editPassword', editPasswordRoutes);
-app.use('/logout', logoutRoutes);
+// app.use('/login', loginRoutes);
+// app.use('/register', registerRoutes);
+// app.use('/createPassword', createPasswordRoutes);
+// app.use('/deletePassword', deletePasswordRoutes);
+// app.use('/editPassword', editPasswordRoutes);
+// app.use('/logout', logoutRoutes);
+app.use('/login', loginRoutes(obj));
+app.use('/register', registerRoutes(obj));
+app.use('/deletePassword', deletePasswordRoutes(db));
+app.use('/editPassword', editPasswordRoutes(db));
+app.use('/logout', logoutRoutes());
 
 
 // Home page

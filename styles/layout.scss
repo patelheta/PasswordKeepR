@@ -5,3 +5,8 @@ html {
   margin: 0;
   font-family: "Source Sans Pro", sans-serif !important;
 }
+
+.passwordContainer {
+  overflow-y: auto;
+  height: 100vh;
+}

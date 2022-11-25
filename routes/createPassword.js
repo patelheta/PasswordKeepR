@@ -1,14 +1,15 @@
 const express = require('express');
 const router = express.Router();
-const editPasswordQuery = require('../db/queries/editPassword');
+const createPasswordsQuery = require('../db/queries/createPassword');
 
 router.post('/', (req, res) => {
-  editPasswordQuery.editPassword(req.body)
+  const userId = req.session.userId;
+  createPasswordsQuery.createPassword({ ...req.body, user_id: userId })
     .then((data) => {
       if (data) {
-        res.json(data);
+        res.redirect(`/`);
       } else {
-        res.send("Fail to edit password");
+        res.send("Fail to create password");
       }
     })
     .catch(err => {
@@ -19,4 +20,3 @@ router.post('/', (req, res) => {
 });
 
 module.exports = router;
-

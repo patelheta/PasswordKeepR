@@ -1,26 +1,14 @@
-const showHiddenPassword = function(id) {
-  let element = document.getElementById(id);
-  let elementType = element.getAttribute("type");
-  if (elementType === "password") {
-    element.setAttribute("type", "text");
-  } else {
-    element.setAttribute("type", "password");
-  }
-};
-
 const copyToClipboard = function(id) {
   let copyText = document.getElementById(id).value;
   navigator.clipboard.writeText(copyText);
 };
 
-$(() => {
-
-  const createPasswordElement = function(record) {
-    const passwordCard = $(`
-  <div class="card">
+const createPasswordElement = function(record) {
+  const passwordCard = $(`
+<div class="card" id="card_${record.id}">
   <div class="card-body">
     <div>
-      <p class="name">${record.name}</p>
+      <div class="name" id="nameLabel_${record.id}">${record.name}</div>
       <span class="userpass">
         <input
           type="text"
@@ -49,35 +37,112 @@ $(() => {
       </span>
     </div>
     <div class="action-button">
-      <span
-        onclick="showHiddenPassword('password_${record.id}')"
-      >
-        <i class="fa-solid fa-eye mr-1"></i>Show
-      </span>
-      <span> <i class="fa-solid fa-pen-to-square mr-1"></i>Edit</span>
-      <span><i class="fa-solid fa-trash"></i></span>
+      <span class="showbtn" id=${record.id}><i class="fa-solid fa-eye mr-1"></i>Show</span>
+      <span class="editbtn" id=${record.id}> <i class="fa-solid fa-pen-to-square mr-1"></i>Edit</span>
+      <span class="savebtn" id=${record.id}> <i class="fa-solid fa-floppy-disk mr-1"></i>Save</span>
+      <span class="deletebtn" id=${record.id}><i class="fa-solid fa-trash"></i></span>
     </div>
   </div>
 </div>`);
-    return passwordCard;
+  return passwordCard;
+};
+
+const renderAllRecords = function(records) {
+  $("#allRecords").empty();
+
+  for (let record of records) {
+    let $record = createPasswordElement(record);
+    $('#allRecords').append($record);
+  }
+};
+
+$(document).on('click', '.showbtn', function() {
+  let id = $(this).attr('id');
+  let elementType = $('#password_' + id).attr('type');
+  if (elementType === "password") {
+    $('#password_' + id).attr("type", "text");
+  } else {
+    $('#password_' + id).attr("type", "password");
+  }
+
+});
+
+$(document).on('click', '.editbtn', function() {
+  let id = $(this).attr('id');
+  if ($('#password_' + id).prop('disabled')) {
+    $('#password_' + id).removeAttr('disabled');
+    $('#username_' + id).removeAttr('disabled');
+    let nameValue = $('#nameLabel_' + id).html();
+    $('#nameLabel_' + id).html(` <input
+        type="text"
+        class="form-control mb-2"
+        id="name_${id}"
+        value="${nameValue}"
+      />`);
+    $(this).css("display", "none");
+    $(this).parent().find('.savebtn').css("display", "block");
+  }
+});
+
+$(document).on('click', '.deletebtn', function() {
+  let id = $(this).attr('id');
+  let orgWebSite = false;
+  if (window.location.href.includes('/org')) {
+    orgWebSite = true;
+  }
+  let data = {
+    id: id,
+    orgWebSite: orgWebSite
   };
-
-  const renderAllRecords = function(records) {
-    $("#allRecords").empty();
-
-    for (let record of records) {
-      let $record = createPasswordElement(record);
-      $('#allRecords').append($record);
+  $.post("/deletePassword", data, function(data) {
+    if (data.id) {
+      $('#card_' + data.id).remove();
     }
-  };
+  });
+});
 
-  const loadRecords = function() {
-    $.get("/api/passwords", function(data) {
-      renderAllRecords(data.passwords);
-    });
+$(document).on('click', '.savebtn', function() {
+  $(this).css("display", "none");
+  $(this).parent().find('.editbtn').css("display", "block");
+  let orgWebSite = false;
+  if (window.location.href.includes('/org')) {
+    orgWebSite = true;
+  }
+  let id = $(this).attr('id');
+  let password = $('#password_' + id).val();
+  let username = $('#username_' + id).val();
+  let name = $('#name_' + id).val();
+  let data = {
+    id: id,
+    password: password,
+    username: username,
+    name: name,
+    orgWebSite: orgWebSite
   };
+  $.post("/editPassword", data, function(data) {
+    loadRecords();
+  });
+});
+
+
+
+const options = {};
+const loadRecords = function() {
+  let url = '/api/passwords/personalPasswords';
+  if (window.location.href.includes('/org')) {
+    url = '/api/passwords/orgPasswords';
+  }
+  $.get(url, options, function(data) {
+    renderAllRecords(data.passwords);
+  });
+};
+
+
+$(() => {
+
   loadRecords();
 
+  //// CategoriesList ////
   const renderAllCategories = function(categories) {
     $("#categoriesList").empty();
 
@@ -88,19 +153,16 @@ $(() => {
     }
 
     $('ul#categoriesList li').click(function() {
-      $('li').removeClass('active');
+      $('#categoriesList li').removeClass('active');
       $(this).addClass('active');
       let categoryId = $(this).attr('id');
-      let data = {
-        categoryId: categoryId
-      };
-      $.get("/api/passwords", data, function(data) {
-        renderAllRecords(data.passwords);
-      });
+      options["categoryId"] = categoryId;
+      loadRecords();
     });
 
     $('#clearFilterBtn').click(function() {
-      $('li').removeClass('active');
+      $('#categoriesList li').removeClass('active');
+      delete options.categoryId;
       loadRecords();
     });
   };
@@ -112,4 +174,36 @@ $(() => {
   };
   loadCategories();
 
+  //// OrganizationsList ////
+  const renderAllOrganizations = function(organizations) {
+    $("#organizationsList").empty();
+
+    for (let organization of organizations) {
+      let $item = `<li id="${organization.id}">
+    ${organization.name}</li>`;
+      $('#organizationsList').append($item);
+    }
+
+    $('ul#organizationsList li').click(function() {
+      $('#organizationsList li').removeClass('active');
+      $(this).addClass('active');
+      let organizationId = $(this).attr('id');
+      options["organizationId"] = organizationId;
+
+      loadRecords();
+    });
+
+    $('#clearOrgFilterBtn').click(function() {
+      $('#organizationsList li').removeClass('active');
+      delete options.organizationId;
+      loadRecords();
+    });
+  };
+
+  const loadOrganizations = function() {
+    $.get("/api/passwords/organizations", function(data) {
+      renderAllOrganizations(data.organizations);
+    });
+  };
+  loadOrganizations();
 });

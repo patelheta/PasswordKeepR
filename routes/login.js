@@ -1,5 +1,9 @@
 const express = require('express');
+<<<<<<< HEAD
 const router  = express.Router();
+=======
+const router = express.Router();
+>>>>>>> 2f2c622160a365b773ad675fae04cbc5353dc731
 
 module.exports = (obj) => {
 
@@ -23,6 +27,5 @@ module.exports = (obj) => {
       })
       .catch((err) => res.send('Error', err));
   });
-
   return router;
 };

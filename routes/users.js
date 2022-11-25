@@ -6,13 +6,7 @@
  */
 
 const express = require('express');
-const router  = express.Router();
-
-// router.get('/', (req, res) => {
-//   res.render('users');
-// });
-
-// module.exports = router;
+const router = express.Router();
 
 module.exports = (db, obj) => {
 
@@ -26,17 +20,17 @@ module.exports = (db, obj) => {
       WHERE users.id = $1
       ;`, [user]
     )
-    .then((userInfo) => {
-      const info = userInfo.rows[0];
-      info.user_id = info.id;
-      res.render('/main', main);
-    })
-    .catch((err => {
-      console.log('Error', err);
-    }))
-  })
+      .then((userInfo) => {
+        const info = userInfo.rows[0];
+        info.user_id = info.id;
+        res.render('/main', main);
+      })
+      .catch((err => {
+        console.log('Error', err);
+      }));
+  });
 
-  router.post('/email', (req, res) =>{
+  router.post('/email', (req, res) => {
     const id = req.session.user_id;
     const { email } = req.body;
     obj.updateUserEmail(email, id);

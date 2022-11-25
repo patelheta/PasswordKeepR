@@ -104,6 +104,9 @@
   .sidebar ul {
     list-style-type: none;
     padding: 0px;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
     margin-bottom: 25px;
     li {
       padding: 8px;

@@ -45,7 +45,6 @@ app.use(express.static('public'));
 app.use(cookieSession({ name: 'session', keys: ["user_id"], maxAge: 24 * 60 * 60 * 1000 /*24 hours*/ }));
 
 // Separated Routes for each Resource
-// Note: Feel free to replace the example routes below with your own
 const userApiRoutes = require('./routes/users-api');
 const passwordsApiRoutes = require('./routes/passwords-api');
 const widgetApiRoutes = require('./routes/widgets-api');
@@ -60,8 +59,6 @@ const logoutRoutes = require('./routes/logout');
 
 
 // Mount all resource routes
-// Note: Feel free to replace the example routes below with your own
-// Note: Endpoints that return data (eg. JSON) usually start with `/api`
 app.use('/api/users', userApiRoutes);
 app.use('/api/passwords', passwordsApiRoutes);
 app.use('/api/widgets', widgetApiRoutes);
@@ -71,22 +68,35 @@ app.use('/register', registerRoutes(obj));
 app.use('/createPassword', createPasswordRoutes);
 app.use('/deletePassword', deletePasswordRoutes);
 app.use('/editPassword', editPasswordRoutes);
-app.use('/logout', logoutRoutes());
+app.use('/logout', logoutRoutes);
 
 
 // Home page
-// Warning: avoid creating more routes in this file!
-// Separate them into separate routes files (see above).
 app.get('/', (req, res) => {
-  res.render('index');
+  let userId = req.session["user_id"];
+  if (!userId) {
+    return res.redirect("/login");
+  } else {
+    res.render('index');
+  }
 });
 
 app.get('/org', (req, res) => {
+  // let userId = req.session["user_id"];
+  // if (!userId) {
+  //   return res.redirect("/login");
+  // } else {
   res.render('org');
+  // }
 });
 
 app.get('/create-password', (req, res) => {
+  // let userId = req.session["user_id"];
+  // if (!userId) {
+  //   return res.redirect("/login");
+  // } else {
   res.render('createPassword');
+  // }
 });
 
 app.listen(PORT, () => {

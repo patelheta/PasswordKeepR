@@ -10,7 +10,7 @@ const getAllPasswords = (options) => {
   queryString += `;`;
   return db.query(queryString, queryParams)
     .then(data => {
-      console.log(data.rows);
+      // console.log(data.rows);
       return data.rows;
     })
     .catch((err) => {

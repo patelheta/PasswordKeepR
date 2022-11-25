@@ -16,12 +16,12 @@ const addNewUser = async function (user) {
     const hash = await argon2.hash(user.user_password);
     const orgID = await db.query(
       `SELECT id FROM organizations WHERE name = $1`,
-      [user.organization_name]
+      [user.organization_id]
     );
     const newUser = await db.query(
-      `INSERT INTO users(FIRST_NAME, LAST_NAME, EMAIL, USER_PASSWORD, ORGANIZATION_ID)
+      `INSERT INTO users(FIRST_NAME, LAST_NAME, EMAIL, PASSWORD, ORGANIZATION_ID)
     VALUES ($1, $2, $3, $4, $5) RETURNING *;`,
-      [user.first_name, user.last_name, user.email, hash, Number(orgID.rows[0]["id"])]
+      [user.first_name, user.last_name, user.email, hash, Number(orgID.rows[0]['id'])]
     );
     return newUser.rows[0];
   } catch (err) {

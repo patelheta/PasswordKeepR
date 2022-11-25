@@ -2,9 +2,6 @@ INSERT INTO org_websites (name, account_name, password, category_id, organizatio
 VALUES ('Compass', 'compassAccount', 'compassPassword', 1, 1);
 
 INSERT INTO org_websites (name, account_name, password, category_id, organization_id)
-VALUES ('Compass', 'compassAccount', 'compassPassword', 1, 2);
-
-INSERT INTO org_websites (name, account_name, password, category_id, organization_id)
 VALUES ('Facebook', 'facebookAccount', 'facebookPassword', 1, 1);
 
 INSERT INTO org_websites (name, account_name, password, category_id, organization_id)
@@ -14,13 +11,7 @@ INSERT INTO org_websites (name, account_name, password, category_id, organizatio
 VALUES ('Discord', 'discordAccount', 'discordPassword', 2, 1);
 
 INSERT INTO org_websites (name, account_name, password, category_id, organization_id)
-VALUES ('Discord', 'discordAccount', 'discordPassword', 2, 2);
-
-INSERT INTO org_websites (name, account_name, password, category_id, organization_id)
 VALUES ('Lighthouse Labs', 'lhlAccount', 'lhlPassword', 3, 1);
 
 INSERT INTO org_websites (name, account_name, password, category_id, organization_id)
 VALUES ('Zoom', 'zoomAccount', 'zoomPassword', 3, 1);
-
-INSERT INTO org_websites (name, account_name, password, category_id, organization_id)
-VALUES ('Zoom', 'zoomAccount', 'zoomPassword', 4, 2);

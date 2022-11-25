@@ -37,7 +37,7 @@ module.exports = (obj) => {
           return res.send('User already exists!');
         }
         obj.addNewUser(users).then((user) => {
-          req.session['user_id'] = user_id;
+          req.session['user_id'] = user.id;
           req.session['organization_id'] = user.organization_id;
           return res.redirect('/main');
         });

@@ -64,8 +64,8 @@ const logoutRoutes = require('./routes/logout');
 app.use('/api/users', userApiRoutes);
 app.use('/api/passwords', passwordsApiRoutes);
 app.use('/api/widgets', widgetApiRoutes);
-app.use('/users', usersRoutes);
 // Note: mount other resources here, using the same pattern above
+app.use('/users', usersRoutes(db, obj));
 app.use('/login', loginRoutes(obj));
 app.use('/register', registerRoutes(obj));
 app.use('/deletePassword', deletePasswordRoutes(db));

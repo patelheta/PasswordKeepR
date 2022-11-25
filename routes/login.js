@@ -25,23 +25,3 @@ module.exports = (obj) => {
   });
   return router;
 };
-  // router.post('/', (req, res) => {
-  //   req.session.user_id = 1;
-  //   // res.redirect('/login/:id');
-  //   res.redirect('/');
-  // });
-
-// router.post('/', (req, res) => {
-//   res.redirect('/login/:id');
-// });
-
-// router.get('/:id', (req, res) => {
-//   req.session.user_id = req.params.id;
-//   res.redirect('/');
-// });
-
-// router.get('/register', (req, res) => {
-//   res.redirect('/register');
-// });
-
-// module.exports = router;

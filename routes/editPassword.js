@@ -3,8 +3,6 @@ const router = express.Router();
 const editPasswordQuery = require('../db/queries/editPassword');
 
 router.post('/', (req, res) => {
-  // const userId = req.session.userId;
-  console.log(req.body);
   editPasswordQuery.editPassword(req.body)
     .then((data) => {
       if (data) {

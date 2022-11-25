@@ -66,17 +66,11 @@ app.use('/api/users', userApiRoutes);
 app.use('/api/passwords', passwordsApiRoutes);
 app.use('/api/widgets', widgetApiRoutes);
 app.use('/users', usersRoutes);
-// Note: mount other resources here, using the same pattern above
-// app.use('/login', loginRoutes);
-// app.use('/register', registerRoutes);
-// app.use('/createPassword', createPasswordRoutes);
-// app.use('/deletePassword', deletePasswordRoutes);
-// app.use('/editPassword', editPasswordRoutes);
-// app.use('/logout', logoutRoutes);
 app.use('/login', loginRoutes(obj));
 app.use('/register', registerRoutes(obj));
-app.use('/deletePassword', deletePasswordRoutes(db));
-app.use('/editPassword', editPasswordRoutes(db));
+app.use('/createPassword', createPasswordRoutes);
+app.use('/deletePassword', deletePasswordRoutes);
+app.use('/editPassword', editPasswordRoutes);
 app.use('/logout', logoutRoutes());
 
 

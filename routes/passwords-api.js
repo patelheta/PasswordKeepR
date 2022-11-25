@@ -1,4 +1,3 @@
-
 const express = require('express');
 const router = express.Router();
 const categoriesQuery = require('../db/queries/categories');

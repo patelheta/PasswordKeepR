@@ -25,7 +25,7 @@ const addNewUser = async function (user) {
     );
     return newUser.rows[0];
   } catch (err) {
-    console.log("Error", err);
+    console.log('Error', err);
   }
 };
 exports.addNewUser = addNewUser;
@@ -41,7 +41,7 @@ const getUserByEmail = async function (email) {
     }
     return user.rows[0];
   } catch (err) {
-    console.log("Error", err);
+    console.log('Error', err);
   }
 };
 exports.getUserByEmail = getUserByEmail;
@@ -96,7 +96,7 @@ const authenticateUser = async function (email, password) {
       return user;
     }
   } catch (err) {
-    console,log('Error', err);
+    console.log('Error', err);
   }
 };
 exports.authenticateUser = authenticateUser;

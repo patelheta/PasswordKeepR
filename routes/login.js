@@ -2,51 +2,53 @@ const express = require('express');
 const router  = express.Router();
 const cookieSession = require('cookie-session');
 
-// module.exports = (obj) => {
+module.exports = (obj) => {
 
-//   router.post('/', (req, res) =>{
-//     const { email, password } = req.body;
-//     obj
-//       .authenticateUser(email, password)
-//       .then((user) => {
-//         if (!user) {
-//           res.render('login/:id', { error: true });
-//           return;
-//         }
-//         req.session['user_id'] = user.id;
-//         req.session['organization_id'] = user.organization_id;
+  router.get('/', (req, res) => {
+    res.render('login');
+  });
 
-//         res.redirect('/main');
-//       })
-//       .catch((err) => {
-//         console.log('Error', err);
-//     });
-//   });
+  router.post('/', (req, res) => {
+    const { email, password } = req.body;
+    obj
+      .authenticateUser(email, password)
+      .then((user) => {
+        if (!user) {
+          res.render('index.ejs', { error: true });
+          return;
+        }
+        req.session['user_id'] = user.id;
+        req.session['organization_id'] = user.organization_id;
 
-//   return router;
-// };
+        res.redirect("/main");
+      })
+      .catch((err) => res.send('Error', err));
+  });
 
-router.use(cookieSession({
-  name: 'session',
-  keys: ['CHARLES'],
-  maxAge: 24 * 60 * 60 * 1000
-}));
+  return router;
+};
 
-router.get('/', (req, res) => {
-  res.render('login');
-});
+// router.use(cookieSession({
+//   name: 'session',
+//   keys: ['CHARLES'],
+//   maxAge: 24 * 60 * 60 * 1000
+// }));
 
-router.post('/', (req, res) => {
-  res.redirect('/login/:id');
-});
+// router.get('/', (req, res) => {
+//   res.render('login');
+// });
 
-router.get('/:id', (req, res) => {
-  req.session.user_id = req.params.id;
-  res.redirect('/');
-});
+// router.post('/', (req, res) => {
+//   res.redirect('/login/:id');
+// });
 
-router.get('/register', (req, res) => {
-  res.redirect('/register');
-});
+// router.get('/:id', (req, res) => {
+//   req.session.user_id = req.params.id;
+//   res.redirect('/');
+// });
 
-module.exports = router;
+// router.get('/register', (req, res) => {
+//   res.redirect('/register');
+// });
+
+// module.exports = router;
